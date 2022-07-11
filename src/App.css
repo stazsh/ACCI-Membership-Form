@@ -84,6 +84,16 @@ legend {
     color: rgb(0, 184, 104);
 }
 
+.imagebox {
+    visibility: collapse;
+    animation-duration: 200ms;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgb(247, 247, 247);
+    border: 1px solid rgb(223, 223, 223);
+}
+
 /* Button CSS */
 .button-3 {
     width: 80px;
