@@ -27,7 +27,7 @@ function App() {
     const checkNotEmpty = () => {
         var docFields = [];
 
-        let fields = ['field1', 'field2', 'field3', 'field4', 'applicant_designation', 'field7', 'field8', 'field9', 'field10', 'field11', 'field12', 'field26'];
+        let fields = ['field1', 'field2', 'field3', 'field4', 'applicant_designation', 'field7', 'field8', 'field9', 'field10', 'field11', 'field12', 'field26', 'field27'];
         fields = [...fields, 'field13', 'field14', 'field15', 'field16', 'field17', 'field18', 'nm_designation', 'field21', 'field22', 'field23', 'field24', 'field25'];
 
         fields.forEach((element) => {
@@ -52,7 +52,7 @@ function App() {
             isEmpty = true;
 
         if (isEmpty)
-            alert('One or more required fields are empty');
+            alert('One or more required fields are empty ⚠️');
     };
 
     useEffect(() => {
@@ -86,28 +86,43 @@ function App() {
             console.log(event.target.value);
             setUploadingState(prevState => prevState + 1);
             var b64 = await convertBlobToBase64(event.target.files[0]);
-            const response = await axios.post(process.env.API_ENDPOINT_ROOT + '/imagekitify', {
+            const response = await axios.post('https://acci-api.herokuapp.com/imagekitify', {
                 base64: b64
             });
 
             console.log(response);
+            document.getElementById(`${event.target.id}-preview-div`).style.background =
+                `center / contain no-repeat url("${response.data.url}"), radial-gradient(rgb(247, 247, 247), rgb(247, 247, 247))`;
+            document.getElementById(`${event.target.id}-preview-div`).style.backgroundSize = 'auto 300px';
+            document.getElementById(`${event.target.id}-preview-div`).style.marginBottom = '18px';
+            document.getElementById(`${event.target.id}-preview-div`).style.visibility = 'visible';
+            document.getElementById(`${event.target.id}-preview-div`).style.height='300px';
+
+            if (event.target.id === 'field22')
+                document.getElementById(`${event.target.id}-preview-div`).style.marginTop = '18px';
+
             setFormState((prevState) => {
                 return {
                     ...prevState,
                     [event.target.name]: response.data.url
                 }
             });
-        } catch (e) {}
+        } catch (e) {
+            console.log(e);
+        }
         setUploadingState(prevState => prevState - 1);
     };
 
-    const onFormSubmit = () => {
-        if (!document.getElementById('check1').checked || !document.getElementById('check2').checked) {
-            alert('Please confirm by checking the confirmation boxes');
+    const onFormSubmit = async () => {
+        if (!document.getElementById('check1').checked) {
+            alert('✅ Please confirm by checking the confirmation box.');
             return
         }
         checkNotEmpty();
         console.log(formState);
+        const response = await axios.post('https://acci-api.herokuapp.com/new-submission', formState);
+        console.log(response);
+        alert('Form submitted successfully ✅');
     }
 
     return (
@@ -142,6 +157,8 @@ function App() {
                             <div style={{ textAlign: 'left' }}><span>Photo of Applicant <b>(max. 200kB)</b><code className='required'>*</code></span></div>
                             <input id='field4' type='file' alt='Photo of applicant' name='photo_of_applicant' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
 
+                            <div className='imagebox' id='field4-preview-div'></div>
+
                             <div style={{ textAlign: 'left' }}><span>Designation<code className='required'>*</code></span></div>
                             <select id='applicant_designation' name="applicant_designation" className='input-field' style={{ height: '25px' }} onChange={handleFormChange}>
                                 <option value="<none>">&lt;none&gt;</option>
@@ -163,14 +180,21 @@ function App() {
                             <div style={{ textAlign: 'left' }}><span>Photo of Aadhaar Card <b>(max. 200kB)</b><code className='required'>*</code></span></div>
                             <input id='field8' type='file' name='aadhaar_photo' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
 
+                            <div className='imagebox' id='field8-preview-div'></div>
+
                             <div style={{ textAlign: 'left' }}><span>PAN Number<code className='required'>*</code></span></div>
                             <input id='field9' type='text' onChange={handleFormChange} name='pan_number' className='input-field' /><br /><br />
 
                             <div style={{ textAlign: 'left' }}><span>Photo of PAN Card <b>(max. 200kB)</b><code className='required'>*</code></span></div>
                             <input id='field10' type='file' name='pan_photo' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
 
+                            <div className='imagebox' id='field10-preview-div'></div>
+
                             <div style={{ textAlign: 'left' }}><span>GST Number<code className='required'>*</code></span></div>
                             <input id='field11' type='text' onChange={handleFormChange} name='gst_number' className='input-field' /><br /><br />
+
+                            <div style={{ textAlign: 'left' }}><span>CIN Number<code className='required'>*</code></span></div>
+                            <input id='field27' type='text' onChange={handleFormChange} name='cin_number' className='input-field' /><br /><br />
 
                             <div style={{ textAlign: 'left' }}><span>Address<code className='required'>*</code></span></div>
                             <input id='field12' type='text' onChange={handleFormChange} name='address' className='input-field' /><br /><br />
@@ -184,6 +208,8 @@ function App() {
                             <div style={{ textAlign: 'left' }}><span>Photo of document related to Business / Profession <b>(max. 200kB)</b><code className='required'>*</code></span></div>
                             <input id='field15' type='file' name='document_proof' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
 
+                            <div className='imagebox' id='field15-preview-div'></div>
+
                             <div style={{ textAlign: 'left' }}><span>Main line of Business / Profession</span><code className='required'>*</code></div>
                             <input id='field16' type='text' onChange={handleFormChange} name='main_line' className='input-field' />
                         </fieldset><br /><br />
@@ -194,6 +220,8 @@ function App() {
 
                             <div style={{ textAlign: 'left' }}><span>Photo of Nominative Representative <b>(max. 200kB)</b><code className='required'>*</code></span></div>
                             <input id='field18' type='file' name='photo_of_nm' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
+
+                            <div className='imagebox' id='field18-preview-div'></div>
 
                             <div style={{ textAlign: 'left' }}><span>Designation</span><code className='required'>*</code></div>
                             <select id='nm_designation' name="nm_designation" className='input-field' style={{ height: '25px' }} onChange={handleFormChange}>
@@ -215,6 +243,8 @@ function App() {
 
                             <div style={{ textAlign: 'left' }}><span>Photo of Nominative Representative's Aadhaar Card <b>(max. 200kB)</b><code className='required'>*</code></span></div>
                             <input id='field22' type='file' name='nm_aadhaar_photo' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} />
+
+                            <div className='imagebox' id='field22-preview-div'></div>
                         </fieldset><br /><br />
 
                         <fieldset><legend>Payment &amp; Review</legend>
@@ -232,9 +262,9 @@ function App() {
                         </fieldset><br />
 
                         <div style={{ marginLeft: '20px', marginRight: '20px' }}>
-                            <input type='checkbox' id='check1' /><span className='smol-text'>&nbsp;All fields have been filled by me</span><br />
-                            <input type='checkbox' id='check2' /><span className='smol-text'>&nbsp;I certify that the above facts are true to the best of my knowledge and belief and I understand that I subject myself to strict authoritative action in the event that the above facts are found to be falsified. </span><br />
-                            <br /><br /></div>
+                            <input type='checkbox' id='check1' /><span className='smol-text'>&nbsp;I certify that the above facts are true to the best of my knowledge and belief and I understand that I subject myself to strict authoritative action in the event that the above facts are found to be falsified. </span>
+                            <br /><br /><br />
+                        </div>
 
                         <div style={{ display: 'flex' }}>
                             <input type='reset' className='button-4' />
