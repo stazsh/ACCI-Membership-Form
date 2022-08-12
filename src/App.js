@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import ACCI from './assets/acci-asn.png';
+import { saveAs } from 'file-saver';
 import axios from 'axios';
 
 function App() {
@@ -119,10 +120,17 @@ function App() {
             return
         }
         checkNotEmpty();
-        console.log(formState);
-        const response = await axios.post('https://acci-api.herokuapp.com/new-submission', formState);
+        const response = await axios({
+            method: 'post',
+            url: 'https://acci-api.herokuapp.com/new-submission',
+            data: formState,
+            responseType: 'arraybuffer'
+        });
+
         console.log(response);
         alert('Form submitted successfully ✅');
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        saveAs(blob, 'acci-form.pdf');
     }
 
     return (
