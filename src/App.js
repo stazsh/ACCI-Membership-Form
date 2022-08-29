@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
+import { API_ENDPOINT } from './Config';
 import ACCI from './assets/acci-asn.png';
 import { saveAs } from 'file-saver';
 import axios from 'axios';
@@ -89,7 +90,7 @@ function App() {
         try {
             setUploadingState(prevState => prevState + 1);
             var b64 = await convertBlobToBase64(event.target.files[0]);
-            const response = await axios.post('https://acci-api.herokuapp.com/imagekitify', {
+            const response = await axios.post(API_ENDPOINT + '/imagekitify', {
                 base64: b64
             });
 
@@ -125,9 +126,11 @@ function App() {
         if (!checkNotEmpty())
             return;
 
+        console.log(formState);
+
         const response = await axios({
             method: 'post',
-            url: 'https://acci-api.herokuapp.com/new-submission',
+            url: API_ENDPOINT + '/new-submission',
             data: formState,
             responseType: 'arraybuffer'
         });
@@ -169,8 +172,8 @@ function App() {
                             <div style={{ textAlign: 'left' }}><span>Name of Applicant<code className='required'>*</code></span></div>
                             <input id='field3' type='text' onChange={handleFormChange} name='name_of_applicant' className='input-field' maxLength={61} /><br /><br />
 
-                            <div style={{ textAlign: 'left' }}><span>Photo of Applicant <b>(max. 200kB)</b><code className='required'>*</code></span></div>
-                            <input id='field4' type='file' alt='Photo of applicant' name='photo_of_applicant' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
+                            <div style={{ textAlign: 'left' }}><span>Photo of Applicant <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
+                            <input id='field4' type='file' alt='Photo of applicant' name='photo_of_applicant' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
 
                             <div className='imagebox' id='field4-preview-div'></div>
 
@@ -192,16 +195,16 @@ function App() {
                             <div style={{ textAlign: 'left' }}><span>Aadhaar Number<code className='required'>*</code></span></div>
                             <input id='field7' type='text' onChange={handleFormChange} name='aadhaar_number' className='input-field' maxLength={61} /><br /><br />
 
-                            <div style={{ textAlign: 'left' }}><span>Photo of Aadhaar Card <b>(max. 200kB)</b><code className='required'>*</code></span></div>
-                            <input id='field8' type='file' name='aadhaar_photo' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
+                            <div style={{ textAlign: 'left' }}><span>Photo of Aadhaar Card <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
+                            <input id='field8' type='file' name='aadhaar_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
 
                             <div className='imagebox' id='field8-preview-div'></div>
 
                             <div style={{ textAlign: 'left' }}><span>PAN Number<code className='required'>*</code></span></div>
                             <input id='field9' type='text' onChange={handleFormChange} name='pan_number' className='input-field' maxLength={61} /><br /><br />
 
-                            <div style={{ textAlign: 'left' }}><span>Photo of PAN Card <b>(max. 200kB)</b><code className='required'>*</code></span></div>
-                            <input id='field10' type='file' name='pan_photo' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
+                            <div style={{ textAlign: 'left' }}><span>Photo of PAN Card <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
+                            <input id='field10' type='file' name='pan_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
 
                             <div className='imagebox' id='field10-preview-div'></div>
 
@@ -223,8 +226,8 @@ function App() {
                             <div style={{ textAlign: 'left' }}><span>Document related to Business / Profession<code className='required'>*</code></span></div>
                             <input id='field28' type='text' onChange={handleFormChange} name='document_proof_description' className='input-field' maxLength={61} /><br /><br />
 
-                            <div style={{ textAlign: 'left' }}><span>Photo of document related to Business / Profession <b>(max. 200kB)</b><code className='required'>*</code></span></div>
-                            <input id='field15' type='file' name='document_proof_photo' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
+                            <div style={{ textAlign: 'left' }}><span>Photo of document related to Business / Profession <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
+                            <input id='field15' type='file' name='document_proof_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
 
                             <div className='imagebox' id='field15-preview-div'></div>
 
@@ -236,8 +239,8 @@ function App() {
                             <div style={{ textAlign: 'left' }}><span>Nominative Representative</span><code className='required'>*</code></div>
                             <input id='field17' type='text' onChange={handleFormChange} name='name_of_nm' className='input-field' maxLength={61} /><br /><br />
 
-                            <div style={{ textAlign: 'left' }}><span>Photo of Nominative Representative <b>(max. 200kB)</b><code className='required'>*</code></span></div>
-                            <input id='field18' type='file' name='photo_of_nm' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
+                            <div style={{ textAlign: 'left' }}><span>Photo of Nominative Representative <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
+                            <input id='field18' type='file' name='photo_of_nm' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
 
                             <div className='imagebox' id='field18-preview-div'></div>
 
@@ -259,8 +262,8 @@ function App() {
                             <div style={{ textAlign: 'left' }}><span>Aadhaar Number<code className='required'>*</code></span></div>
                             <input id='field21' type='text' onChange={handleFormChange} name='nm_aadhaar_number' maxLength={61} className='input-field' /><br /><br />
 
-                            <div style={{ textAlign: 'left' }}><span>Photo of Nominative Representative's Aadhaar Card <b>(max. 200kB)</b><code className='required'>*</code></span></div>
-                            <input id='field22' type='file' name='nm_aadhaar_photo' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} />
+                            <div style={{ textAlign: 'left' }}><span>Photo of Nominative Representative's Aadhaar Card <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
+                            <input id='field22' type='file' name='nm_aadhaar_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} />
 
                             <div className='imagebox' id='field22-preview-div'></div>
                         </fieldset><br /><br />
