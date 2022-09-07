@@ -28,7 +28,7 @@ function App() {
         var docFields = [];
 
         let fields = ['field1', 'field2', 'field3', 'field4', 'applicant_designation', 'field7', 'field8', 'field9', 'field10', 'field11', 'field12', 'field26', 'field27'];
-        fields = [...fields, 'field13', 'field14', 'field15', 'field16', 'field17', 'field18', 'nm_designation', 'field21', 'field22', 'field23', 'field24', 'field25'];
+        fields = [...fields, 'field13', 'field14', 'field15', 'field16', 'field17', 'field18', 'nm_designation', 'field21', 'field22', 'field23', 'field24', 'field25', 'field28'];
 
         fields.forEach((element) => {
             docFields.push(document.getElementById(element));
@@ -204,9 +204,12 @@ function App() {
 
                             <div style={{ textAlign: 'left' }}><span>E-mail ID<code className='required'>*</code></span></div>
                             <input id='field14' type='email' onChange={handleFormChange} name='email_id' className='input-field' /><br /><br />
+                                
+                            <div style={{ textAlign: 'left' }}><span>Document related to Business / Profession<code className='required'>*</code></span></div>
+                            <input id='field28' type='text' onChange={handleFormChange} name='document_proof_description' className='input-field' /><br /><br />
 
                             <div style={{ textAlign: 'left' }}><span>Photo of document related to Business / Profession <b>(max. 200kB)</b><code className='required'>*</code></span></div>
-                            <input id='field15' type='file' name='document_proof' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
+                            <input id='field15' type='file' name='document_proof_photo' style={{ marginTop: '3px' }} accept='image/*' onChange={handleFileInputFormChange} /><br /><br />
 
                             <div className='imagebox' id='field15-preview-div'></div>
 
