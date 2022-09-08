@@ -52,8 +52,12 @@ function App() {
         )
             isEmpty = true;
 
-        if (isEmpty)
+        if (isEmpty) {
             alert('One or more required fields are empty ⚠️');
+            return false;
+        }
+
+        return true;
     };
 
     useEffect(() => {
@@ -61,7 +65,6 @@ function App() {
     }, []);
 
     const handleFormChange = (event) => {
-        console.log(event.target.value);
         checkDesignSpecValid();
         setFormState((prevState) => {
             return {
@@ -84,7 +87,6 @@ function App() {
 
     const handleFileInputFormChange = async (event) => {
         try {
-            console.log(event.target.value);
             setUploadingState(prevState => prevState + 1);
             var b64 = await convertBlobToBase64(event.target.files[0]);
             const response = await axios.post('https://acci-api.herokuapp.com/imagekitify', {
@@ -119,7 +121,10 @@ function App() {
             alert('✅ Please confirm by checking the confirmation box.');
             return
         }
-        checkNotEmpty();
+
+        if (!checkNotEmpty())
+            return;
+
         const response = await axios({
             method: 'post',
             url: 'https://acci-api.herokuapp.com/new-submission',
@@ -131,19 +136,21 @@ function App() {
         alert('Form submitted successfully ✅');
         const blob = new Blob([response.data], { type: 'application/pdf' });
         saveAs(blob, 'acci-form.pdf');
+
+        window.location.reload();
     }
 
     return (
         <>
             {(uploadingState > 0) ?
                 <div className='dialogue'>
-                    Uploading in progress in the background.
+                    Uploading in progress
                 </div> : <></>}
             <div className="App">
                 <div className='Sub-App'>
                     <img src={ACCI} alt="ACCI logo" style={{ width: '50%' }} /><br /><br />
                     <span className='heading'>Membership Application Form</span><br /><br /><br /><br />
-                    <form className='left-align'>
+                    <form className='left-align' id='zaform'>
                         <fieldset><legend>Membership &amp; Company</legend>
                             <div style={{ textAlign: 'left' }}><span>Membership Type<code className='required'>*</code></span></div>
                             <select id='field1' name="membership_type" className='input-field' style={{ height: '25px' }} onChange={handleFormChange}>
