@@ -1,5 +1,5 @@
 # ACCI Membership Form
-Form generator of Asansol Chamber of Commerce and Industry
+Form generator for Asansol Chamber of Commerce and Industry
 
 ## Getting Started with Create React App
 
