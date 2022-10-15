@@ -154,7 +154,7 @@ function App() {
                     <img src={ACCI} alt="ACCI logo" style={{ width: '50%' }} /><br /><br />
                     <span className='heading'>Membership Application Form</span><br /><br /><br /><br />
                     <form className='left-align' id='zaform'>
-                        <fieldset><legend>Membership &amp; Company</legend>
+                        <fieldset><legend>Company Metadata</legend>
                             <div style={{ textAlign: 'left' }}><span>Membership Type<code className='required'>*</code></span></div>
                             <select id='field1' name="membership_type" className='input-field' style={{ height: '25px' }} onChange={handleFormChange}>
                                 <option value="<none>">&lt;none&gt;</option>
@@ -165,18 +165,30 @@ function App() {
                             <br /><br />
 
                             <div style={{ textAlign: 'left' }}><span>Name of Company / Firm<code className='required'>*</code></span></div>
-                            <input id='field2' type='text' onChange={handleFormChange} name='name_of_company_firm' className='input-field' maxLength={61} />
+                            <input id='field2' type='text' onChange={handleFormChange} name='name_of_company_firm' className='input-field' maxLength={61} /><br /><br />
+
+                            <div style={{ textAlign: 'left' }}><span>Address<code className='required'>*</code></span></div>
+                            <input id='field3' type='text' onChange={handleFormChange} name='company_address' className='input-field' maxLength={61} /><br /><br />
+
+                            <div style={{ textAlign: 'left' }}><span>Contact Number(s) (comma separated)<code className='required'>*</code></span></div>
+                            <input id='field4' type='text' onChange={handleFormChange} name='company_phones' className='input-field' maxLength={61} /><br /><br />
+
+                            <div style={{ textAlign: 'left' }}><span>E-mail ID<code className='required'>*</code></span></div>
+                            <input id='field5' type='text' onChange={handleFormChange} name='company_phones' className='input-field' maxLength={61} /><br /><br />
+
+                            <div style={{ textAlign: 'left' }}><span>PAN Number<code className='required'>*</code></span></div>
+                            <input id='field6' type='text' onChange={handleFormChange} name='pan_number' className='input-field' maxLength={61} /><br /><br />
+
+                            <div style={{ textAlign: 'left' }}><span>Photo of PAN Card <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
+                            <input id='field7' type='file' name='pan_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
+
+                            <div className='imagebox' id='field7-preview-div'></div>
+
+                            <div style={{ textAlign: 'left' }}><span>GST Number<code className='required'>*</code></span></div>
+                            <input id='field8' type='text' onChange={handleFormChange} name='gst_number' className='input-field' maxLength={61} /><br /><br />
                         </fieldset><br /><br />
 
-                        <fieldset><legend>Applicant Information &amp; Company Metadata</legend>
-                            <div style={{ textAlign: 'left' }}><span>Name of Applicant<code className='required'>*</code></span></div>
-                            <input id='field3' type='text' onChange={handleFormChange} name='name_of_applicant' className='input-field' maxLength={61} /><br /><br />
-
-                            <div style={{ textAlign: 'left' }}><span>Photo of Applicant <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
-                            <input id='field4' type='file' alt='Photo of applicant' name='photo_of_applicant' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
-
-                            <div className='imagebox' id='field4-preview-div'></div>
-
+                        <fieldset><legend>Applicant Information</legend>
                             <div style={{ textAlign: 'left' }}><span>Designation<code className='required'>*</code></span></div>
                             <select id='applicant_designation' name="applicant_designation" className='input-field' style={{ height: '25px' }} onChange={handleFormChange}>
                                 <option value="<none>">&lt;none&gt;</option>
@@ -192,57 +204,53 @@ function App() {
                                 <input type='text' id='applicant_designation_specification' onChange={handleFormChange} name='applicant_designation_specification' maxLength={61} style={{ backgroundColor: '#cfebfa' }} className='input-field' /><br /><br />
                             </div>
 
-                            <div style={{ textAlign: 'left' }}><span>Aadhaar Number<code className='required'>*</code></span></div>
-                            <input id='field7' type='text' onChange={handleFormChange} name='aadhaar_number' className='input-field' maxLength={61} /><br /><br />
+                            <div style={{ textAlign: 'left' }}><span>Name of Applicant<code className='required'>*</code></span></div>
+                            <input id='field9' type='text' onChange={handleFormChange} name='name_of_applicant' className='input-field' maxLength={61} /><br /><br />
 
-                            <div style={{ textAlign: 'left' }}><span>Photo of Aadhaar Card <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
-                            <input id='field8' type='file' name='aadhaar_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
+                            <div style={{ textAlign: 'left' }}><span>Male / Female<code className='required'>*</code></span></div>
+                            <select id='field10' name="applicant_gender" className='input-field' style={{ height: '25px' }} onChange={handleFormChange}>
+                                <option value="<none>">&lt;none&gt;</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <br /><br />
 
-                            <div className='imagebox' id='field8-preview-div'></div>
+                            <div style={{ textAlign: 'left' }}><span>Photo of Applicant <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
+                            <input id='field11' type='file' alt='Photo of applicant' name='photo_of_applicant' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
 
-                            <div style={{ textAlign: 'left' }}><span>PAN Number<code className='required'>*</code></span></div>
-                            <input id='field9' type='text' onChange={handleFormChange} name='pan_number' className='input-field' maxLength={61} /><br /><br />
-
-                            <div style={{ textAlign: 'left' }}><span>Photo of PAN Card <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
-                            <input id='field10' type='file' name='pan_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
-
-                            <div className='imagebox' id='field10-preview-div'></div>
-
-                            <div style={{ textAlign: 'left' }}><span>GST Number<code className='required'>*</code></span></div>
-                            <input id='field11' type='text' onChange={handleFormChange} name='gst_number' className='input-field' maxLength={61} /><br /><br />
-
-                            <div style={{ textAlign: 'left' }}><span>CIN Number<code className='required'>*</code></span></div>
-                            <input id='field27' type='text' onChange={handleFormChange} name='cin_number' className='input-field' maxLength={61} /><br /><br />
-
-                            <div style={{ textAlign: 'left' }}><span>Address<code className='required'>*</code></span></div>
-                            <input id='field12' type='text' onChange={handleFormChange} name='address' className='input-field' maxLength={61} /><br /><br />
+                            <div className='imagebox' id='field11-preview-div'></div>
 
                             <div style={{ textAlign: 'left' }}><span>Contact Number<code className='required'>*</code></span></div>
-                            <input id='field13' type='text' onChange={handleFormChange} name='contact_number' className='input-field' maxLength={61} /><br /><br />
+                            <input id='field12' type='text' onChange={handleFormChange} name='applicant_contact_number' className='input-field' maxLength={61} /><br /><br />
 
-                            <div style={{ textAlign: 'left' }}><span>E-mail ID<code className='required'>*</code></span></div>
-                            <input id='field14' type='email' onChange={handleFormChange} name='email_id' className='input-field' maxLength={61} /><br /><br />
-                                
-                            <div style={{ textAlign: 'left' }}><span>Document related to Business / Profession<code className='required'>*</code></span></div>
-                            <input id='field28' type='text' onChange={handleFormChange} name='document_proof_description' className='input-field' maxLength={61} /><br /><br />
+                            <div style={{ textAlign: 'left' }}><span>Aadhaar Number<code className='required'>*</code></span></div>
+                            <input id='field13' type='text' onChange={handleFormChange} name='applicant_aadhaar_number' className='input-field' maxLength={61} /><br /><br />
 
-                            <div style={{ textAlign: 'left' }}><span>Photo of document related to Business / Profession <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
-                            <input id='field15' type='file' name='document_proof_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
+                            <div style={{ textAlign: 'left' }}><span>Photo of Aadhaar Card <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
+                            <input id='field14' type='file' name='aadhaar_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
 
-                            <div className='imagebox' id='field15-preview-div'></div>
+                            <div className='imagebox' id='field14-preview-div'></div>
 
                             <div style={{ textAlign: 'left' }}><span>Main line of Business / Profession</span><code className='required'>*</code></div>
-                            <input id='field16' type='text' onChange={handleFormChange} name='main_line' className='input-field' maxLength={61} />
+                            <input id='field15' type='text' onChange={handleFormChange} name='main_line' className='input-field' maxLength={61} /><br /><br />
+                            
+                            <div style={{ textAlign: 'left' }}><span>Document related to Business / Profession<code className='required'>*</code></span></div>
+                            <input id='field16' type='text' onChange={handleFormChange} name='document_proof_description' className='input-field' maxLength={61} /><br /><br />
+                            
+                            <div style={{ textAlign: 'left' }}><span>Photo of document related to Business / Profession <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
+                            <input id='field17' type='file' name='document_proof_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
+                                
+                            <div className='imagebox' id='field17-preview-div'></div>
                         </fieldset><br /><br />
 
                         <fieldset><legend>Nominative Representative Information</legend>
-                            <div style={{ textAlign: 'left' }}><span>Nominative Representative</span><code className='required'>*</code></div>
-                            <input id='field17' type='text' onChange={handleFormChange} name='name_of_nm' className='input-field' maxLength={61} /><br /><br />
+                            <div style={{ textAlign: 'left' }}><span>Nominative Representative Name</span><code className='required'>*</code></div>
+                            <input id='field18' type='text' onChange={handleFormChange} name='name_of_nm' className='input-field' maxLength={61} /><br /><br />
 
                             <div style={{ textAlign: 'left' }}><span>Photo of Nominative Representative <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
-                            <input id='field18' type='file' name='photo_of_nm' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
+                            <input id='field19' type='file' name='photo_of_nm' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
 
-                            <div className='imagebox' id='field18-preview-div'></div>
+                            <div className='imagebox' id='field19-preview-div'></div>
 
                             <div style={{ textAlign: 'left' }}><span>Designation</span><code className='required'>*</code></div>
                             <select id='nm_designation' name="nm_designation" className='input-field' style={{ height: '25px' }} onChange={handleFormChange}>
@@ -259,27 +267,33 @@ function App() {
                                 <input type='text' id='nm_designation_specification' onChange={handleFormChange} maxLength={61} name='nm_designation_specification' className='input-field' style={{ backgroundColor: '#cfebfa' }} /><br /><br />
                             </div>
 
+                            <div style={{ textAlign: 'left' }}><span>Contact Number<code className='required'>*</code></span></div>
+                            <input id='field20' type='text' onChange={handleFormChange} name='nm_contact_number' className='input-field' maxLength={61} /><br /><br />
+
                             <div style={{ textAlign: 'left' }}><span>Aadhaar Number<code className='required'>*</code></span></div>
                             <input id='field21' type='text' onChange={handleFormChange} name='nm_aadhaar_number' maxLength={61} className='input-field' /><br /><br />
 
                             <div style={{ textAlign: 'left' }}><span>Photo of Nominative Representative's Aadhaar Card <b>(max. 200kB, JPEG format only)</b><code className='required'>*</code></span></div>
-                            <input id='field22' type='file' name='nm_aadhaar_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} />
+                            <input id='field22' type='file' name='nm_aadhaar_photo' style={{ marginTop: '3px' }} accept='image/jpeg' onChange={handleFileInputFormChange} /><br /><br />
 
                             <div className='imagebox' id='field22-preview-div'></div>
+
+                            <div style={{ textAlign: 'left' }}><span>Proposed by<code className='required'>*</code></span></div>
+                            <input id='field23' type='text' onChange={handleFormChange} name='proposed_by' maxLength={61} className='input-field' /><br /><br />
+
+                            <div style={{ textAlign: 'left' }}><span>ID<code className='required'>*</code></span></div>
+                            <input id='field24' type='text' onChange={handleFormChange} name='proposed_by_id' maxLength={61} className='input-field' /><br /><br />
                         </fieldset><br /><br />
 
                         <fieldset><legend>Payment &amp; Review</legend>
+                            <div style={{ textAlign: 'left' }}><span>Cash / Cheque / DD no.<code className='required'>*</code></span></div>
+                            <input id='field25' type='text' onChange={handleFormChange} name='cash_cheque_dd_no' maxLength={61} className='input-field' /><br /><br />
+
+                            <div style={{ textAlign: 'left' }}><span>Payment / Cheque / DD date <b>(in dd/mm/yyyy)</b><code className='required'>*</code></span></div>
+                            <input id='field26' type='text' onChange={handleFormChange} name='cash_cheque_dd_date' maxLength={61} className='input-field' /><br /><br />
+
                             <div style={{ textAlign: 'left' }}><span>Amount <b>(in INR)</b><code className='required'>*</code></span></div>
-                            <input id='field23' type='text' onChange={handleFormChange} name='amount' maxLength={61} className='input-field' /><br /><br />
-
-                            <div style={{ textAlign: 'left' }}><span>Payment Details<code className='required'>*</code></span></div>
-                            <input id='field24' type='text' onChange={handleFormChange} name='payment_details' maxLength={61} className='input-field' /><br /><br />
-
-                            <div style={{ textAlign: 'left' }}><span>Proposed by<code className='required'>*</code></span></div>
-                            <input id='field25' type='text' onChange={handleFormChange} name='proposed_by' maxLength={61} className='input-field' /><br /><br />
-
-                            <div style={{ textAlign: 'left' }}><span>ID<code className='required'>*</code></span></div>
-                            <input id='field26' type='text' onChange={handleFormChange} name='proposed_by_id' maxLength={61} className='input-field' /><br /><br />
+                            <input id='field27' type='text' onChange={handleFormChange} name='cash_cheque_dd_no' maxLength={61} className='input-field' /><br /><br />
                         </fieldset><br />
 
                         <div style={{ marginLeft: '20px', marginRight: '20px' }}>
