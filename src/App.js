@@ -170,7 +170,7 @@ function App() {
                             <div style={{ textAlign: 'left' }}><span>Address<code className='required'>*</code></span></div>
                             <input id='field3' type='text' onChange={handleFormChange} name='company_address' className='input-field' maxLength={61} /><br /><br />
 
-                            <div style={{ textAlign: 'left' }}><span>Contact Number(s) (comma separated)<code className='required'>*</code></span></div>
+                            <div style={{ textAlign: 'left' }}><span>Contact Number(s) <b>(comma separated if more than one)</b><code className='required'>*</code></span></div>
                             <input id='field4' type='text' onChange={handleFormChange} name='company_phones' className='input-field' maxLength={61} /><br /><br />
 
                             <div style={{ textAlign: 'left' }}><span>E-mail ID<code className='required'>*</code></span></div>
