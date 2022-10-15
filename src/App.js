@@ -30,7 +30,7 @@ function App() {
         var docFields = [];
 
         let fields = ['field1', 'field2', 'field3', 'field4', 'applicant_designation', 'field7', 'field8', 'field9', 'field10', 'field11', 'field12', 'field26', 'field27'];
-        fields = [...fields, 'field13', 'field14', 'field15', 'field16', 'field17', 'field18', 'nm_designation', 'field21', 'field22', 'field23', 'field24', 'field25', 'field28'];
+        fields = [...fields, 'field13', 'field14', 'field15', 'field16', 'field17', 'field18', 'nm_designation', 'field21', 'field22', 'field23', 'field24', 'field25'];
 
         fields.forEach((element) => {
             docFields.push(document.getElementById(element));
@@ -174,7 +174,7 @@ function App() {
                             <input id='field4' type='text' onChange={handleFormChange} name='company_phones' className='input-field' maxLength={61} /><br /><br />
 
                             <div style={{ textAlign: 'left' }}><span>E-mail ID<code className='required'>*</code></span></div>
-                            <input id='field5' type='text' onChange={handleFormChange} name='company_phones' className='input-field' maxLength={61} /><br /><br />
+                            <input id='field5' type='text' onChange={handleFormChange} name='company_email' className='input-field' maxLength={61} /><br /><br />
 
                             <div style={{ textAlign: 'left' }}><span>PAN Number<code className='required'>*</code></span></div>
                             <input id='field6' type='text' onChange={handleFormChange} name='pan_number' className='input-field' maxLength={61} /><br /><br />
@@ -293,7 +293,7 @@ function App() {
                             <input id='field26' type='text' onChange={handleFormChange} name='cash_cheque_dd_date' maxLength={61} className='input-field' /><br /><br />
 
                             <div style={{ textAlign: 'left' }}><span>Amount <b>(in INR)</b><code className='required'>*</code></span></div>
-                            <input id='field27' type='text' onChange={handleFormChange} name='cash_cheque_dd_no' maxLength={61} className='input-field' /><br /><br />
+                            <input id='field27' type='text' onChange={handleFormChange} name='amount' maxLength={61} className='input-field' /><br /><br />
                         </fieldset><br />
 
                         <div style={{ marginLeft: '20px', marginRight: '20px' }}>
